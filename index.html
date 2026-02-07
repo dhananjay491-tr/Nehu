@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Special Surprise</title>
+    <title>A Special Surprise for Tweetu</title>
     <style>
-        /* Feature 1: Bright Vibrant Lavender */
         body {
             background-color: #DDA0DD; 
             font-family: 'Arial Rounded MT Bold', 'Helvetica', sans-serif;
@@ -24,12 +23,11 @@
         }
 
         h1 {
-            color: #4b0082; /* Deep Indigo text */
+            color: #4b0082;
             font-size: 2.5rem;
             text-shadow: 2px 2px 4px rgba(255,255,255,0.4);
         }
 
-        /* Feature 3: Pop up message */
         .popup-box {
             background: white;
             padding: 15px 25px;
@@ -48,7 +46,6 @@
             justify-content: center;
         }
 
-        /* Feature 4: Buttons in the same best-suited color */
         button {
             padding: 15px 30px;
             font-size: 1.1rem;
@@ -57,22 +54,36 @@
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: bold;
-            background-color: #8e44ad; /* Rich Violet */
+            background-color: #8e44ad;
             color: white;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
         button:hover {
             transform: translateY(-5px) scale(1.05);
-            background-color: #7d3c98; /* Slightly darker on hover */
+            background-color: #7d3c98;
         }
 
         #surprise-page { display: none; }
 
+        /* Character Layout */
+        .character-box {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
         .penguin-container {
             font-size: 100px;
-            margin-bottom: 20px;
             position: relative;
+        }
+
+        .tweety-img {
+            width: 100px; /* Adjust size of Tweety */
+            height: auto;
+            margin-bottom: 10px;
         }
 
         .rose-hand {
@@ -90,7 +101,6 @@
             animation: pulse 1.5s infinite;
         }
 
-        /* Falling Petals Animation */
         .petal {
             position: fixed;
             top: -10%;
@@ -126,10 +136,13 @@
     </div>
 
     <div id="surprise-page" class="container">
-        <div class="penguin-container">
-            🐧<span class="rose-hand">🌹</span>
+        <div class="character-box">
+            <img src="https://pngimg.com/d/tweety_bird_PNG33.png" alt="Tweety" class="tweety-img">
+            <div class="penguin-container">
+                🐧<span class="rose-hand">🌹</span>
+            </div>
         </div>
-        <h1>Happy Rose Day Kocho🌹🌹<br>I love you so much</h1>
+        <h1>Happy Rose Day Tweetu🌹🌹<br>I love you so much</h1>
         <button class="hug-btn" onclick="playMusic()">hug me 🤗</button>
         <audio id="bg-music"><source src="Tor_Ek_Kothay(256k).mp3" type="audio/mpeg"></audio>
     </div>
@@ -142,13 +155,13 @@
         }
 
         function exitSite() {
-            alert("The penguin is sad now... but okay! 👋");
+            alert("Tweetu will miss this! 👋");
             window.location.href = "https://www.google.com";
         }
 
         function playMusic() {
             var audio = document.getElementById('bg-music');
-            audio.play().catch(e => console.log("Audio file missing or blocked."));
+            audio.play().catch(e => console.log("Audio play blocked."));
             alert("Sending you the biggest hug ever! ❤️");
         }
 
@@ -164,10 +177,4 @@
                     petal.style.animationDuration = (Math.random() * 3 + 3) + 's';
                     document.body.appendChild(petal);
                     setTimeout(() => { petal.remove(); }, 6000);
-                }, i * 250);
-            }
-            setTimeout(startPetals, 10000);
-        }
-    </script>
-</body>
-</html>
+                },
