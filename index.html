@@ -24,8 +24,9 @@
 
         h1 {
             color: #4b0082;
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             text-shadow: 2px 2px 4px rgba(255,255,255,0.4);
+            margin-top: 20px;
         }
 
         .popup-box {
@@ -64,53 +65,72 @@
             background-color: #7d3c98;
         }
 
+        /* --- Loading Screen Styles --- */
+        #loader {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: #DDA0DD;
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .heart-loader {
+            font-size: 80px;
+            animation: heartPulse 1s infinite;
+        }
+
         #surprise-page { display: none; }
 
-        /* Updated Character Box for Tweety & Penguin */
         .character-box {
             display: flex;
             justify-content: center;
             align-items: flex-end;
-            gap: 25px;
-            margin-bottom: 20px;
+            gap: 15px;
+            margin-bottom: 10px;
         }
 
-        /* Tweety using High-Res Emoji approach */
-        .tweety-emoji {
-            font-size: 90px;
-            animation: tweetyBounce 1.5s ease-in-out infinite;
-            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.1));
-            line-height: 1;
+        .tweety-img {
+            width: 120px;
+            height: auto;
+            animation: characterBounce 1.5s ease-in-out infinite;
         }
 
         .penguin-container {
-            font-size: 100px;
+            font-size: 110px;
             position: relative;
             line-height: 1;
+            animation: characterBounce 1.5s ease-in-out infinite;
+            animation-delay: 0.2s;
         }
 
         .rose-hand {
             font-size: 45px;
             position: absolute;
-            bottom: 5px;
-            right: 15px;
+            bottom: 10px;
+            right: 10px;
         }
 
         .hug-btn {
             background-color: #ff4757;
             color: white;
-            margin-top: 25px;
+            margin-top: 20px;
             padding: 18px 45px;
             animation: pulse 1.5s infinite;
         }
 
-        @keyframes tweetyBounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-25px); }
+        /* --- Animations --- */
+        @keyframes heartPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
         }
 
-        @keyframes fall {
-            to { transform: translateY(110vh) translateX(80px) rotate(360deg); }
+        @keyframes characterBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
         }
 
         @keyframes bounce {
@@ -130,47 +150,63 @@
             z-index: 1;
             animation: fall linear forwards;
         }
+
+        @keyframes fall {
+            to { transform: translateY(110vh) translateX(80px) rotate(360deg); }
+        }
     </style>
 </head>
 <body>
+
+    <div id="loader">
+        <div class="heart-loader">❤️</div>
+        <p style="color: #4b0082; font-weight: bold; margin-top: 10px;">Opening your gift...</p>
+    </div>
 
     <div id="main-page" class="container">
         <h1>kita baa!! ki khobor shobor? 🫣🫣</h1>
         <div class="popup-box">parde ke piche kya hai?</div>
         <div class="btn-group">
-            <button onclick="showSurprise()">cholo dekhi</button>
+            <button onclick="startLoading()">cholo dekhe nei</button>
             <button onclick="exitSite()">na mood nai pore dekhbo</button>
         </div>
     </div>
 
     <div id="surprise-page" class="container">
         <div class="character-box">
-            <div class="tweety-emoji">🐤</div>
-            
+            <img src="tweety.png" alt="Tweety" class="tweety-img">
             <div class="penguin-container">
                 🐧<span class="rose-hand">🌹</span>
             </div>
         </div>
-        <h1>Happy Rose Day Tweetu🌹🌹<br>I love you so much</h1>
+        <h1>Happy Belated Rose Day Tweetu🌹🌹<br>I love you so much😘😘</h1>
         <button class="hug-btn" onclick="playMusic()">hug me 🤗</button>
         <audio id="bg-music"><source src="Tor_Ek_Kothay(256k).mp3" type="audio/mpeg"></audio>
     </div>
 
     <script>
-        function showSurprise() {
+        function startLoading() {
             document.getElementById('main-page').style.display = 'none';
+            document.getElementById('loader').style.display = 'flex';
+            
+            // Wait 1.5 seconds before showing surprise
+            setTimeout(showSurprise, 1500);
+        }
+
+        function showSurprise() {
+            document.getElementById('loader').style.display = 'none';
             document.getElementById('surprise-page').style.display = 'block';
             startPetals();
         }
 
         function exitSite() {
-            alert("Pingu will miss you! 😔😔");
+            alert("Pingu will mish you😔😔");
             window.location.href = "https://www.google.com";
         }
 
         function playMusic() {
             var audio = document.getElementById('bg-music');
-            audio.play().catch(e => console.log("Music file check."));
+            audio.play().catch(e => alert("Please make sure your-song.mp3 is uploaded!"));
             alert("Sending you the biggest hug ever! ❤️");
         }
 
