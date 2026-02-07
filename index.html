@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Surprise</title>
+    <style>
+        body {
+            background-color: #E6E6FA; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .container {
+            padding: 20px;
+            transition: all 0.5s ease;
+            z-index: 10;
+        }
+
+        h1 {
+            color: #5d5d81;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .popup-box {
+            background: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            display: inline-block;
+            margin-bottom: 30px;
+            font-weight: bold;
+            color: #ff6b6b;
+            animation: bounce 2s infinite;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+            font-weight: bold;
+        }
+
+        .btn-yes { background-color: #9b59b6; color: white; }
+        .btn-no { background-color: #95a5a6; color: white; }
+        button:hover { transform: scale(1.1); }
+
+        /* Surprise Page Styles */
+        #surprise-page { display: none; }
+
+        .penguin-container {
+            font-size: 100px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .rose-hand {
+            font-size: 40px;
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+        }
+
+        .hug-btn {
+            background-color: #ff4757;
+            color: white;
+            margin-top: 20px;
+            padding: 20px 40px;
+        }
+
+        /* --- Falling Petals Animation --- */
+        .petal {
+            position: fixed;
+            top: -10%;
+            z-index: 1;
+            user-select: none;
+            cursor: default;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) translateX(100px) rotate(360deg);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="main-page" class="container">
+        <h1>kita baa!! ki khobor shobor? 🫣🫣</h1>
+        <div class="popup-box">parde ke piche kya hai?</div>
+        <div class="btn-group">
+            <button class="btn-yes" onclick="showSurprise()">cholo dekho</button>
+            <button class="btn-no" onclick="exitSite()">na mood nai pore dekhi</button>
+        </div>
+    </div>
+
+    <div id="surprise-page" class="container">
+        <div class="penguin-container">
+            🐧<span class="rose-hand">🌹</span>
+        </div>
+        <h1>Happy Rose Day Kocho🌹🌹<br>I love you so much</h1>
+        <button class="hug-btn" onclick="playMusic()">hug me 🤗</button>
+        
+        <audio id="bg-music">
+            <source src="your-song.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <script>
+        function showSurprise() {
+            document.getElementById('main-page').style.display = 'none';
+            document.getElementById('surprise-page').style.display = 'block';
+            startPetals(); // Trigger the petals
+        }
+
+        function exitSite() {
+            alert("Okay, take your time! Bye bye! 👋");
+            window.location.href = "https://www.google.com";
+        }
+
+        function playMusic() {
+            var audio = document.getElementById('bg-music');
+            audio.play().catch(e => alert("Please ensure 'your-song.mp3' is in the folder!"));
+            alert("Sending you the biggest hug ever! ❤️");
+        }
+
+        // --- Petal Logic ---
+        function startPetals() {
+            const petalCount = 30;
+            const container = document.body;
+            const roses = ['🌹', '🌸', '❤️'];
+
+            for (let i = 0; i < petalCount; i++) {
+                setTimeout(() => {
+                    const petal = document.createElement('div');
+                    petal.className = 'petal';
+                    petal.innerText = roses[Math.floor(Math.random() * roses.length)];
+                    
+                    // Randomize position and speed
+                    petal.style.left = Math.random() * 100 + 'vw';
+                    petal.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                    petal.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                    petal.style.opacity = Math.random();
+
+                    container.appendChild(petal);
+
+                    // Remove petal after it falls to save memory
+                    setTimeout(() => { petal.remove(); }, 5000);
+                }, i * 300); // Staggered start
+            }
+            
+            // Loop the petals every few seconds
+            setTimeout(startPetals, 9000);
+        }
+    </script>
+</body>
+</html>
