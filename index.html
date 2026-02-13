@@ -148,5 +148,97 @@
         <h1>kita baa!! ki khobor shobor? 🫣🫣</h1>
         <div class="popup-box">parde ke piche kya hai?</div>
         <div class="btn-group">
-            <button style="background:#8e44ad; color:white; padding:15px 30px; border-radius:30px; border:none; font-weight:bold
-                
+            <button style="background:#8e44ad; color:white; padding:15px 30px; border-radius:30px; border:none; font-weight:bold; cursor:pointer; font-size:1.1rem;" onclick="startLoading()">cholo dekhe nei</button>
+        </div>
+    </div>
+
+    <div id="surprise-page" class="container">
+        <div class="character-box">
+            <img src="tweety.png" alt="Tweety" class="tweety-img">
+            <div class="penguin-container">🐧<span class="rose-hand">💝</span></div>
+        </div>
+
+        <button class="letter-btn" onclick="openLetter()">dil ke andar jhaak lo thoda ❤️</button>
+
+        <h3>Our Memory Vault 📸</h3>
+        <div class="memory-vault">
+            <div class="polaroid"> <img src="photo1.jpg" alt="1"> <span>The Start ✨</span> </div>
+            <div class="polaroid"> <img src="photo2.jpg" alt="2"> <span>That Smile! 😍</span> </div>
+            <div class="polaroid"> <img src="photo3.jpg" alt="3"> <span>Favorite Day 🍕</span> </div>
+            <div class="polaroid"> <img src="photo4.jpg" alt="4"> <span>Pingu & Tweetu 🐧</span> </div>
+            <div class="polaroid"> <img src="photo5.jpg" alt="5"> <span>Togetherness ❤️</span> </div>
+            <div class="polaroid"> <img src="photo6.jpg" alt="6"> <span>Special Moments 🌸</span> </div>
+            <div class="polaroid"> <img src="photo7.jpg" alt="7"> <span>Sweetest Memory 🍬</span> </div>
+            <div class="polaroid"> <img src="photo8.jpg" alt="8"> <span>Our Vibe ✨</span> </div>
+            <div class="polaroid"> <img src="photo9.jpg" alt="9"> <span>Just Us. 👫</span> </div>
+            <div class="polaroid"> <img src="photo10.jpg" alt="10"> <span>Forever! ♾️</span> </div>
+        </div>
+
+        <h1>Happy Valentine's Day, Tweetu! 🌹</h1>
+        
+        <div class="meesho-voucher" onclick="revealGift(this)">
+            <div id="gift-instruction">🎁 A Surprise for You! <br><small>(Tap to Unbox)</small></div>
+            <div id="gift-value" class="voucher-amount">
+                ₹800.00
+                <div style="font-size: 0.9rem; font-weight: normal; margin-top: 10px;">Meesho Shopping Spree! 🛍️✨</div>
+                <p style="font-size: 0.7rem; opacity: 0.9;">*Screenshot this to redeem*</p>
+            </div>
+        </div>
+
+        <button class="hug-btn" onclick="playMusic()">hug me 🤗</button>
+        <audio id="bg-music"><source src="Tor_Ek_Kothay(256k).mp3" type="audio/mpeg"></audio>
+    </div>
+
+    <script>
+        function startLoading() {
+            document.getElementById('main-page').style.display = 'none';
+            document.getElementById('loader').style.display = 'flex';
+            setTimeout(showSurprise, 1500);
+        }
+
+        function showSurprise() {
+            document.getElementById('loader').style.display = 'none';
+            document.getElementById('surprise-page').style.display = 'block';
+            startPetals(['🌹', '🌸', '💖', '✨']);
+        }
+
+        function openLetter() {
+            document.getElementById('letterModal').style.display = 'flex';
+        }
+
+        function closeLetter() {
+            document.getElementById('letterModal').style.display = 'none';
+        }
+
+        function playMusic() {
+            var audio = document.getElementById('bg-music');
+            audio.play().catch(e => console.log("Music blocked."));
+            alert("Sending you the biggest hug ever, Tweetu! ❤️");
+        }
+
+        function revealGift(element) {
+            element.style.animation = 'none';
+            document.getElementById('gift-instruction').style.display = 'none';
+            document.getElementById('gift-value').style.display = 'block';
+            element.style.background = 'linear-gradient(135deg, #2ecc71 0%, #27ae60 100%)';
+            startPetals(['💸', '💰', '💖', '🛍️', '🎁']);
+            alert("Happy Valentine's Day! Go pick something beautiful on Meesho! 😘");
+        }
+
+        function startPetals(items) {
+            for (let i = 0; i < 35; i++) {
+                setTimeout(() => {
+                    const petal = document.createElement('div');
+                    petal.className = 'petal';
+                    petal.innerText = items[Math.floor(Math.random() * items.length)];
+                    petal.style.left = Math.random() * 100 + 'vw';
+                    petal.style.fontSize = (Math.random() * 25 + 15) + 'px';
+                    petal.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                    document.body.appendChild(petal);
+                    setTimeout(() => { petal.remove(); }, 6000);
+                }, i * 200);
+            }
+        }
+    </script>
+</body>
+</html>
